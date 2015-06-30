@@ -38,9 +38,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SwitchCompat;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.Menu;
@@ -53,7 +52,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class BeaconsDetailsActivity extends AppCompatActivity implements DownloadTaskerFragment.DownloadCanceledListener {
+public class BeaconsDetailsActivity extends ActionBarActivity implements DownloadTaskerFragment.DownloadCanceledListener {
 	private static final String DEFAULT_URL = "http://www.nordicsemi.no";
 	private static final String DEFAULT_APP = "com.google.android.gm";
 
@@ -90,6 +89,7 @@ public class BeaconsDetailsActivity extends AppCompatActivity implements Downloa
 		// Create and fill views
 		createView(id);
 		fillView(id);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
 	@Override
@@ -116,12 +116,7 @@ public class BeaconsDetailsActivity extends AppCompatActivity implements Downloa
 	}
 
 	private void createView(final long id) {
-		setContentView(R.layout.activity_beacon_details);
-
-		// Setup the custom toolbar
-		final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-		setSupportActionBar(toolbar);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		setContentView(R.layout.fragment_details);
 
 		mUuidView = (TextView) findViewById(R.id.uuid);
 		mMajorView = (TextView) findViewById(R.id.major);
@@ -367,7 +362,7 @@ public class BeaconsDetailsActivity extends AppCompatActivity implements Downloa
 			if (!TaskerIntent.taskerInstalled(this)) {
 				// If Tasker app is not installed, show download dialog
 				final DownloadTaskerFragment dialog = DownloadTaskerFragment.getInstance();
-				dialog.show(getSupportFragmentManager(), null);
+				dialog.show(getFragmentManager(), null);
 			} else {
 				// Tasker is installed
 				startActivityForResult(TaskerIntent.getTaskSelectIntent(), TASKER_REQUEST_CODE);

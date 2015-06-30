@@ -24,6 +24,7 @@ package no.nordicsemi.android.nrfbeacon.scanner;
 import java.util.UUID;
 
 import no.nordicsemi.android.nrfbeacon.R;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -33,7 +34,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.ParcelUuid;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
